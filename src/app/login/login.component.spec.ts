@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { of } from 'rxjs';
+import { AuthService } from './auth.service';
 
 import { LoginComponent } from './login.component';
 
@@ -7,10 +9,21 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
+  const authServiceStub: jasmine.SpyObj<AuthService> = jasmine.createSpyObj(
+    'authService',
+    ['login']
+  );
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
       imports: [ReactiveFormsModule],
+      providers: [
+        {
+          provide: AuthService,
+          useValue: authServiceStub,
+        },
+      ],
     }).compileComponents();
   });
 
@@ -18,6 +31,10 @@ describe('LoginComponent', () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 
   it('should render form with email and password inputs', () => {
@@ -93,7 +110,21 @@ describe('LoginComponent', () => {
     );
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should invoke auth service when form is valid', () => {
+    const elements: HTMLElement = fixture.nativeElement;
+
+    const email = component.form.controls.email;
+    email.setValue('test@test.com');
+    const password = component.form.controls.password;
+    password.setValue('123456');
+    authServiceStub.login.and.returnValue(of());
+
+    elements.querySelector('button').click();
+
+    expect(authServiceStub.login.calls.any()).toBeTruthy();
+    expect(authServiceStub.login).toHaveBeenCalledWith(
+      email.value,
+      password.value
+    );
   });
 });
