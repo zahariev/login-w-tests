@@ -1,0 +1,14 @@
+.is-invalid {
+  border-left: solid 6px red;
+}
+
+.material-icons {
+  display: inline-flex;
+  vertical-align: middle;
+  font-size: 1.1em;
+}
+
+.text-danger {
+  font-size: 0.9em;
+  margin: 0px;
+}
