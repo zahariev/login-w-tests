@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from './login/auth.service';
 import { FakeServerInterceptor } from './fakeServer.interceptor';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,6 +16,8 @@ import { FakeServerInterceptor } from './fakeServer.interceptor';
     BrowserModule,
     RouterModule,
     HttpClientModule,
+    MatToolbarModule,
+    MatIconModule,
     AppRoutingModule,
     BrowserAnimationsModule,
   ],
