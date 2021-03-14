@@ -26,8 +26,14 @@ export class RegisterComponent implements OnInit {
         // email is required and must be a valid email email
         email: [
           null,
-          Validators.compose([Validators.email, Validators.required]),
+          [
+            Validators.required,
+            Validators.pattern(
+              '[a-zA-Z0-9_\\.\\+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-\\.]+'
+            ),
+          ],
         ],
+        // password: ['', Validators.required],
         password: [
           null,
           Validators.compose([
@@ -40,7 +46,7 @@ export class RegisterComponent implements OnInit {
               hasCapitalCase: true,
             }),
             // 4. check whether the entered password has a lower-case letter
-            CustomValidators.patternValidator(/[a-z]/, { hasSmallCase: true }),
+            CustomValidators.patternValidator(/[a-z]/, { hasLowerCase: true }),
             // 5. check whether the entered password has a special character
             CustomValidators.patternValidator(
               /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,
@@ -58,5 +64,38 @@ export class RegisterComponent implements OnInit {
         validator: CustomValidators.passwordMatchValidator,
       }
     );
+  }
+
+  passwordCheck() {
+    return (
+      this.form.controls.password.invalid && this.form.controls.password.touched
+    );
+  }
+
+  emailCheck() {
+    return this.form.controls.email.invalid && this.form.controls.email.touched;
+  }
+
+  confirmCheck() {
+    return (
+      this.form.controls.confirmPassword.invalid &&
+      this.form.controls.confirmPassword.touched
+    );
+  }
+
+  invalidEmailMessage() {
+    if (
+      this.form.controls.email.hasError('required') &&
+      this.form.controls.email.touched
+    ) {
+      return 'Email is Required!';
+    } else if (
+      this.form.controls.email.touched &&
+      this.form.controls.email.invalid
+    ) {
+      return 'Email is not valid!';
+    } else {
+      return '';
+    }
   }
 }
