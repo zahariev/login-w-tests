@@ -47,12 +47,12 @@
               >Password:</label
             >
             <input
+              autocomplete="false"
               id="password"
               formControlName="password"
               type="password"
               class="form-control"
               [ngClass]="passwordCheck() ? 'is-invalid' : ''"
-              autocomplete="off"
             />
             <!-- <label class="text-danger col" *ngIf="form.controls['password'].hasError('required')">
               Password is Required!
