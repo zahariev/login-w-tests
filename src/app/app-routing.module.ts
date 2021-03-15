@@ -4,6 +4,12 @@ import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
+    path: '',
+    loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginModule),
+    data: { preload: true },
+  },
+  {
     path: 'login',
     loadChildren: () =>
       import('./login/login.module').then((m) => m.LoginModule),
