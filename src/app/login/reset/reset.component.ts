@@ -32,6 +32,31 @@ export class ResetComponent implements OnInit {
     });
   }
 
+  invalidEmailMessage() {
+    if (
+      this.requestResetForm.controls.email.hasError('required') &&
+      this.requestResetForm.controls.email.touched
+    ) {
+      return 'Email is Required!';
+    } else if (
+      this.requestResetForm.controls.email.touched &&
+      this.requestResetForm.controls.email.invalid
+    ) {
+      return 'Email is not valid!';
+    } else {
+      return '';
+    }
+  }
+
+  touchInvalidCheck(formElementName: string) {
+    console.log(this.requestResetForm.controls[formElementName]);
+
+    return (
+      this.requestResetForm.controls[formElementName].invalid &&
+      this.requestResetForm.controls[formElementName].touched
+    );
+  }
+
   requestResetUser(form) {
     console.log(form);
     if (form.valid) {

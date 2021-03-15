@@ -19,18 +19,24 @@
             >
               <div class="form-group">
                 <input
+                  autocomplete="false"
+                  novalidate
                   _ngcontent-c0=""
                   class="form-control form-control-lg"
                   placeholder="email"
                   type="text"
                   id="email"
                   formControlName="email"
+                  [ngClass]="touchInvalidCheck('email') ? 'is-invalid' : ''"
                 />
                 <span
                   *ngIf="!requestResetForm.get('email').valid && !isvalidForm"
                   class="help-block"
                   >Please enter a valid email!</span
                 >
+                <label class="text-danger">
+                  {{ invalidEmailMessage() }}
+                </label>
               </div>
               <div class="form-group">
                 <div>
