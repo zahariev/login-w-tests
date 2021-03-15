@@ -107,4 +107,6 @@ describe('RegisterComponent', () => {
     expect(errors.hasLowerCase).toBeDefined();
     expect(errors.hasLowerCase).toBeTrue();
   });
+
+  it('should show password when clicked icon', () => {});
 });
