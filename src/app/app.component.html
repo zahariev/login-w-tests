@@ -52,7 +52,7 @@
   </a>
 </div> -->
 
-<mat-toolbar>
+<!-- <mat-toolbar>
   <a
     mat-icon-button
     class="example-icon"
@@ -61,8 +61,7 @@
     <mat-icon>menu</mat-icon>
   </a>
   <span> </span>
-  <span class="example-spacer"></span>
-  <a
+  <span class="spacer"></span> <a
     mat-icon-button
     class="example-icon favorite-icon"
     aria-label="Example icon-button with heart icon"
@@ -76,6 +75,25 @@
   >
     <mat-icon>share</mat-icon>
   </a>
+   <a mat-button routerLink="/register">Register</a>
+  <a mat-button routerLink="/login">Login</a>
+</mat-toolbar> -->
+
+<mat-toolbar>
+  <mat-toolbar-row>
+    <!--  <span>HOME</span> -->
+    <a
+      routerLink="/"
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+    >
+      <mat-icon>menu</mat-icon>
+    </a>
+    <span class="spacer"></span>
+    <a class="mat-button" routerLink="/register">Register</a>
+    <a class="mat-button" routerLink="/login">Login</a>
+  </mat-toolbar-row>
 </mat-toolbar>
 <app-breadcrumb></app-breadcrumb>
 
