@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   ActivatedRoute,
-  Data,
+  ActivatedRouteSnapshot,
   NavigationEnd,
   PRIMARY_OUTLET,
   Router,
@@ -22,31 +22,37 @@ export class BreadcrumbComponent implements OnInit {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .pipe(map(() => this.activatedRoute))
-      .pipe(
-        map((route) => {
-          while (route.firstChild) {
-            route = route.firstChild;
-          }
-          return route;
-        })
-      )
       .pipe(filter((route) => route.outlet === PRIMARY_OUTLET))
       .subscribe((route) => {
-        const snapshot = this.router.routerState.snapshot;
+        let routeSnapshot = route.snapshot;
+
         this.breadcrumbs = [];
 
-        const url = snapshot.url;
-        const routeData = route.snapshot.data;
+        let url = '';
 
-        console.log(routeData);
-        const label = routeData.breadcrumb;
-        const params = snapshot.root.params;
+        while (routeSnapshot.firstChild) {
+          routeSnapshot = routeSnapshot.firstChild;
 
-        this.breadcrumbs.push({
-          url,
-          label,
-          params,
-        });
+          const path = routeSnapshot.routeConfig.path;
+
+          if (!path.length) {
+            continue;
+          }
+
+          url += `/${path}`;
+
+          const label = routeSnapshot.data.breadcrumb;
+          const params = routeSnapshot.params;
+
+          this.breadcrumbs.push({
+            url,
+            label,
+            params,
+          });
+        }
       });
+  }
+  private createUrl(route: ActivatedRouteSnapshot) {
+    return route.url.map((s) => s.toString()).join('/');
   }
 }
