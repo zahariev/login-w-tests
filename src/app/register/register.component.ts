@@ -9,6 +9,8 @@ import { CustomValidators } from './custom-validators';
 })
 export class RegisterComponent implements OnInit {
   public form: FormGroup;
+  showPassword = false;
+  showConfirm = false;
 
   constructor(private fb: FormBuilder) {
     this.form = this.createSignupForm();
@@ -46,7 +48,9 @@ export class RegisterComponent implements OnInit {
               hasCapitalCase: true,
             }),
             // 4. check whether the entered password has a lower-case letter
-            CustomValidators.patternValidator(/[a-z]/, { hasLowerCase: true }),
+            CustomValidators.patternValidator(/[a-z]/, {
+              hasLowerCase: true,
+            }),
             // 5. check whether the entered password has a special character
             CustomValidators.patternValidator(
               /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,
@@ -66,20 +70,10 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  passwordCheck() {
+  touchInvalidCheck(formElementName: string) {
     return (
-      this.form.controls.password.invalid && this.form.controls.password.touched
-    );
-  }
-
-  emailCheck() {
-    return this.form.controls.email.invalid && this.form.controls.email.touched;
-  }
-
-  confirmCheck() {
-    return (
-      this.form.controls.confirmPassword.invalid &&
-      this.form.controls.confirmPassword.touched
+      this.form.controls[formElementName].invalid &&
+      this.form.controls[formElementName].touched
     );
   }
 

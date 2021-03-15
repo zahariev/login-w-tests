@@ -12,11 +12,7 @@
           <div class="form-group">
             <label
               for="email"
-              [ngClass]="
-                form.controls['email'].invalid && form.controls['email'].touched
-                  ? 'text-danger1'
-                  : ''
-              "
+              [ngClass]="touchInvalidCheck('email') ? 'text-danger1' : ''"
               >Email Address</label
             >
             <input
@@ -24,11 +20,7 @@
               formControlName="email"
               type="email"
               class="form-control"
-              [ngClass]="
-                form.controls['email'].invalid && form.controls['email'].touched
-                  ? 'is-invalid1'
-                  : ''
-              "
+              [ngClass]="touchInvalidCheck('email') ? 'is-invalid' : ''"
             />
             <label class="text-danger">
               {{ invalidEmailMessage() }}
@@ -43,17 +35,22 @@
           <div class="form-group">
             <label
               for="password"
-              [ngClass]="passwordCheck() ? 'text-danger1' : ''"
+              [ngClass]="touchInvalidCheck('password') ? 'text-danger1' : ''"
               >Password:</label
             >
             <input
               autocomplete="false"
               id="password"
               formControlName="password"
-              type="password"
+              [type]="showPassword ? 'text' : 'password'"
               class="form-control"
-              [ngClass]="passwordCheck() ? 'is-invalid' : ''"
+              [ngClass]="touchInvalidCheck('password') ? 'is-invalid' : ''"
             />
+            <span class="field-icon" (click)="showPassword = !showPassword">
+              <mat-icon>{{
+                !showPassword ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </span>
             <!-- <label class="text-danger col" *ngIf="form.controls['password'].hasError('required')">
               Password is Required!
             </label> -->
@@ -113,14 +110,14 @@
                 class="col"
                 [ngClass]="
                   form.controls['password'].hasError('required') ||
-                  form.controls['password'].hasError('hasSmallCase')
+                  form.controls['password'].hasError('hasLowerCase')
                     ? 'text-danger'
                     : 'text-success'
                 "
               >
                 <i class="material-icons">{{
                   form.controls["password"].hasError("required") ||
-                  form.controls["password"].hasError("hasSmallCase")
+                  form.controls["password"].hasError("hasLowerCase")
                     ? "cancel"
                     : "check_circle"
                 }}</i>
@@ -156,23 +153,27 @@
             <input
               id="confirmPassword"
               formControlName="confirmPassword"
-              type="password"
+              [type]="showConfirm ? 'text' : 'password'"
               class="form-control"
               [ngClass]="
-                form.controls['confirmPassword'].invalid ? 'is-invalid' : ''
+                touchInvalidCheck('confirmPassword') ? 'is-invalid' : ''
               "
             />
+            <span class="field-icon" (click)="showConfirm = !showConfirm">
+              <mat-icon>{{
+                !showConfirm ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </span>
+
             <label
               class="text-danger"
-              *ngIf="form.controls['confirmPassword'].hasError('required')"
+              *ngIf="form.controls.confirmPassword.hasError('required')"
             >
               Password is Required!
             </label>
             <label
               class="text-danger"
-              *ngIf="
-                form.controls['confirmPassword'].hasError('NoPassswordMatch')
-              "
+              *ngIf="form.controls.confirmPassword.hasError('NoPassswordMatch')"
             >
               Password do not match
             </label>
