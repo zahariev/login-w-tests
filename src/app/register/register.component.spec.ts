@@ -52,7 +52,7 @@ describe('RegisterComponent', () => {
     expect(password.errors.required).toBeTruthy();
   });
 
-  it('should validate email format', () => {
+  it('should validate wrong email format', () => {
     const email = component.form.controls.email;
     email.setValue('test');
     const errors = email.errors;
@@ -62,7 +62,7 @@ describe('RegisterComponent', () => {
     expect(email.valid).toBeFalsy();
   });
 
-  it('should validate email format correctly', () => {
+  it('should validate correct email ', () => {
     const email = component.form.controls.email;
     email.setValue('test@test.com');
     const errors = email.errors || {};
@@ -109,4 +109,26 @@ describe('RegisterComponent', () => {
   });
 
   it('should show password when clicked icon', () => {});
+
+  it('should indicate invalid when the passwords DO NOT match.', () => {
+    const password = component.form.controls.password;
+    const confirm = component.form.controls.confirmPassword;
+    password.setValue('!AA1');
+    confirm.setValue('!AA');
+
+    const errors = confirm.errors || {};
+
+    expect(errors.noPasswordMatch).toBeTruthy();
+  });
+
+  it('should indicate valid when passwords DO match.', () => {
+    const password = component.form.controls.password;
+    const confirm = component.form.controls.confirmPassword;
+    password.setValue('!AA1');
+    confirm.setValue('!AA1');
+
+    const errors = confirm.errors || {};
+
+    expect(errors.noPasswordMatch).toBeUndefined();
+  });
 });
