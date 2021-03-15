@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset.component.html',
@@ -20,7 +21,12 @@ export class ResetComponent implements OnInit {
     this.requestResetForm = new FormGroup({
       email: new FormControl(
         null,
-        [Validators.required, Validators.email],
+        [
+          Validators.required,
+          Validators.pattern(
+            '[a-zA-Z0-9_\\.\\+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-\\.]+'
+          ),
+        ],
         this.forbiddenEmails
       ),
     });
