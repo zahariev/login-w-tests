@@ -106,7 +106,7 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
     expect(elements.querySelector('#password-error')).toBeTruthy();
     expect(elements.querySelector('#password-error').textContent).toContain(
-      'Please enter a valid password.'
+      'Please enter a valid password'
     );
   });
 

@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
-  submitted: boolean = false;
+  submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -17,13 +17,22 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.pattern('[^ @]*@[^ @]*')]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            '[a-zA-Z0-9_\\.\\+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-\\.]+'
+          ),
+        ],
+      ],
       password: ['', Validators.required],
     });
   }
 
   onSubmit() {
     this.submitted = true;
+    console.log(this.form);
 
     if (this.form.valid) {
       this.authService
