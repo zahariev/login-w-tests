@@ -1,5 +1,6 @@
 .is-invalid {
   border-left: solid 6px red;
+  background-image: none !important;
 }
 
 .material-icons {
@@ -11,4 +12,18 @@
 .text-danger {
   font-size: 0.9em;
   margin: 0px;
+}
+
+.text-success {
+  font-size: 0.9em;
+  margin: 0px;
+}
+
+.field-icon {
+  font-size: 1.4em;
+  float: right;
+  left: -15px;
+  margin-top: -33px;
+  position: relative;
+  z-index: 2;
 }
