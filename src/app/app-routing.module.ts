@@ -7,19 +7,19 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('./login/login.module').then((m) => m.LoginModule),
-    data: { preload: true },
+    data: { preload: true, breadcrumb: 'Home' },
   },
   {
     path: 'login',
     loadChildren: () =>
       import('./login/login.module').then((m) => m.LoginModule),
-    data: { preload: true },
+    data: { preload: true, breadcrumb: 'Home' },
   },
   {
     path: 'register',
     loadChildren: () =>
       import('./register/register.module').then((m) => m.RegisterModule),
-    data: { preload: true },
+    data: { preload: true, breadcrumb: 'Home' },
   },
 ];
 

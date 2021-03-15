@@ -1,0 +1,13 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li><a href="index.html" target="">Home</a></li>
+    <li *ngFor="let breadcrumb of breadcrumbs">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+      <a
+        [routerLink]="[breadcrumb.url, breadcrumb.params]"
+        routerLinkActive="active"
+        >{{ breadcrumb.label }}</a
+      >
+    </li>
+  </ol>
+</nav>

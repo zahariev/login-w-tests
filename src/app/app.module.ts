@@ -9,9 +9,10 @@ import { AuthService } from './login/auth.service';
 import { FakeServerInterceptor } from './fakeServer.interceptor';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, BreadcrumbComponent],
   imports: [
     BrowserModule,
     RouterModule,
