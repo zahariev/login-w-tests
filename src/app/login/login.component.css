@@ -17,13 +17,10 @@
   font-size: 15px;
 }
 
-input[type="password"]::-webkit-input-placeholder
-  /* input[type="password"]::-moz-placeholder
-  input[type="password"]:-ms-input-placeholder
-  input[type="password"]:-moz-placeholder  */ {
-  /* Chrome/Opera/Safari */
-
-  font-size: 2em;
+input[type="password"]::-webkit-input-placeholder,
+input[type="password"]::-moz-placeholder,
+input[type="password"]:-ms-input-placeholder,
+input[type="password"]:-moz-placeholder {
   color: rgb(122, 122, 122);
   font-weight: 900;
 }
